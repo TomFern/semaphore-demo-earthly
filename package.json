@@ -1,0 +1,21 @@
+{
+  "name": "earthly-demo",
+  "version": "1.0.0",
+  "description": "Hello Earthly",
+  "private": true,
+  "scripts": {
+    "test": "jest",
+    "start": "node src/app.js"
+  },
+  "author": "",
+  "license": "MPL-2.0",
+  "devDependencies": {
+    "jest": "^27.1.0"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "http-server": "^0.12.1",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  }
+}
