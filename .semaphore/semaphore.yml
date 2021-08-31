@@ -1,0 +1,28 @@
+version: v1.0
+name: Initial Pipeline
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+global_job_config:
+  prologue:
+    commands:
+      - 'sudo /bin/sh -c ''wget https://github.com/earthly/earthly/releases/latest/download/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly && /usr/local/bin/earthly bootstrap --with-autocomplete'''
+blocks:
+  - name: Build
+    task:
+      jobs:
+        - name: Build
+          commands:
+            - checkout
+            - cache restore
+            - earthly +build
+            - cache store
+  - name: Tests
+    task:
+      jobs:
+        - name: Unit
+          commands:
+            - checkout
+            - cache restore
+            - earthly +tests
