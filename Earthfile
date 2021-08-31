@@ -2,6 +2,7 @@ FROM node:14.17-alpine3.12
 WORKDIR /app
 
 build:
+    COPY node_modules ./
     COPY package.json ./
     COPY package-lock.json ./
     RUN npm install
@@ -12,18 +13,18 @@ build:
 
 tests:
     FROM +build
-    COPY spec spec
+    COPY spec ./
     RUN npm test
 
 lint:
     FROM +build
-    COPY .jshintrc .jshintrc
+    COPY .jshintrc ./
     RUN npm run lint
 
 integration-tests:
     FROM +build
-    COPY docker-compose.yml docker-compose.yml
-    COPY integration-tests integration-tests
+    COPY docker-compose.yml ./
+    COPY integration-tests ./
     WITH DOCKER --compose docker-compose.yml --service db
         RUN sleep 10 && npm run integration-tests
     END
