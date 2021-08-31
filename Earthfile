@@ -6,9 +6,7 @@ build:
     COPY package-lock.json ./
     RUN npm install
     COPY src src
-
-lockfile-update:
-    FROM +build
+    SAVE ARTIFACT node_modules AS LOCAL ./node_modules
     SAVE ARTIFACT package.json AS LOCAL ./package.json
     SAVE ARTIFACT package-lock.json AS LOCAL ./package-lock.json
 
@@ -33,8 +31,6 @@ integration-tests:
 docker:
     FROM +build
     RUN npm install --only=production
-    # COPY +build/dist ./dist
-    # COPY src src
     EXPOSE 3000
     ENTRYPOINT ["npm", "start"]
     SAVE IMAGE semaphore-demo-earthly:latest
