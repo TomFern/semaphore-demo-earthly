@@ -1,21 +1,18 @@
-FROM node:13.10.1-alpine3.11
+FROM node:14.17-alpine3.12
 WORKDIR /app
 
 build:
     COPY package.json ./
     COPY package-lock.json ./
-    # RUN npm add pg
     RUN npm install
     COPY src src
-    #SAVE ARTIFACT package.json AS LOCAL ./package.json
-    #SAVE ARTIFACT package-lock.json AS LOCAL ./package-lock.json
 
 lockfile-update:
     FROM +build
     SAVE ARTIFACT package.json AS LOCAL ./package.json
     SAVE ARTIFACT package-lock.json AS LOCAL ./package-lock.json
 
-unit-tests:
+tests:
     FROM +build
     COPY spec spec
     RUN npm test
@@ -40,4 +37,4 @@ docker:
     # COPY src src
     EXPOSE 3000
     ENTRYPOINT ["npm", "start"]
-    SAVE IMAGE myapp2:latest
+    SAVE IMAGE semaphore-demo-earthly:latest
