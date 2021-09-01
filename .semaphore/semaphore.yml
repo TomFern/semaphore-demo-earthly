@@ -23,6 +23,19 @@ blocks:
       jobs:
         - name: Unit
           commands:
+            - earthly +tests
+        - name: Lint
+          commands:
+            - earthly +lint
+      prologue:
+        commands:
+          - checkout
+          - cache restore
+  - name: Integrate
+    task:
+      jobs:
+        - name: Integration
+          commands:
             - checkout
             - cache restore
-            - earthly +tests
+            - earthly +integration-tests
