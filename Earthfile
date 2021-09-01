@@ -33,4 +33,4 @@ docker:
     RUN npm install --only=production
     EXPOSE 3000
     ENTRYPOINT ["npm", "start"]
-    SAVE IMAGE semaphore-demo-earthly:latest
+    SAVE IMAGE --push semaphore-demo-earthly:latest
