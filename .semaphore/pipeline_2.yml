@@ -20,3 +20,5 @@ blocks:
             - earthly +docker
             - 'docker tag semaphore-demo-earthly $DOCKER_USERNAME/semaphore-demo-earthly '
             - 'docker push $DOCKER_USERNAME/semaphore-demo-earthly '
+      secrets:
+        - name: dockerhub
