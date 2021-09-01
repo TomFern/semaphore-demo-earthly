@@ -48,3 +48,6 @@ blocks:
             - earthly -P +integration-tests
       secrets:
         - name: dockerhub
+promotions:
+  - name: Push Image
+    pipeline_file: pipeline_2.yml

@@ -1,0 +1,22 @@
+version: v1.0
+name: Push Image
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+global_job_config:
+  prologue:
+    commands:
+      - 'sudo /bin/sh -c ''wget https://github.com/earthly/earthly/releases/latest/download/earthly-linux-amd64 -O /usr/local/bin/earthly && chmod +x /usr/local/bin/earthly && /usr/local/bin/earthly bootstrap --with-autocomplete'''
+blocks:
+  - name: Docker Hub
+    task:
+      jobs:
+        - name: Push
+          commands:
+            - 'echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin'
+            - checkout
+            - cache restore
+            - earthly +docker
+            - 'docker tag semaphore-demo-earthly $DOCKER_USERNAME/semaphore-demo-earthly '
+            - 'docker push $DOCKER_USERNAME/semaphore-demo-earthly '
