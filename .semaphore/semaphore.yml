@@ -17,7 +17,7 @@ blocks:
             - 'echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin'
             - checkout
             - cache restore
-            - earthly +build
+            - earthly --ci +build
             - cache store
       secrets:
         - name: dockerhub
@@ -26,10 +26,10 @@ blocks:
       jobs:
         - name: Unit
           commands:
-            - earthly +tests
+            - earthly --ci +tests
         - name: Lint
           commands:
-            - earthly +lint
+            - earthly --ci +lint
       prologue:
         commands:
           - 'echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin'
@@ -45,7 +45,7 @@ blocks:
             - 'echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin'
             - checkout
             - cache restore
-            - earthly -P +integration-tests
+            - earthly --ci -P +integration-tests
       secrets:
         - name: dockerhub
 promotions:
