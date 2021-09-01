@@ -10,10 +10,10 @@ The `final` branch shows the complete config.
 
 Fork the repository and clone it. Switch to the `final` branch and install Earthly in your machine.
 
-Build dependencies: `earthly +build`
-Run unit tests: `earthly +tests`
-Run integration tests: `earthly +integration-tests`
-Build a docker image: `earthly +docker`
+- Build dependencies: `earthly +build`
+- Run unit tests: `earthly +tests`
+- Run integration tests: `earthly +integration-tests`
+- Build a docker image: `earthly +docker`
 
 ## License
 
