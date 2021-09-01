@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "test": "jest",
-    "lint":"jshint src/*.js",
+    "lint": "jshint src/*.js",
     "start": "node src/app.js",
     "integration-tests": "node integration-tests/*"
   },
