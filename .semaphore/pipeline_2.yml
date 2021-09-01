@@ -17,8 +17,8 @@ blocks:
             - 'echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin'
             - checkout
             - cache restore
-            - earthly +docker
-            - 'docker tag semaphore-demo-earthly $DOCKER_USERNAME/semaphore-demo-earthly '
-            - 'docker push $DOCKER_USERNAME/semaphore-demo-earthly '
+            - earthly --push +docker
+            - '# docker tag semaphore-demo-earthly $DOCKER_USERNAME/semaphore-demo-earthly '
+            - '# docker push $DOCKER_USERNAME/semaphore-demo-earthly '
       secrets:
         - name: dockerhub
