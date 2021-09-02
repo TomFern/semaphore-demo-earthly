@@ -15,6 +15,10 @@ Fork the repository and clone it. Switch to the `final` branch and install Earth
 - Run integration tests: `earthly +integration-tests`
 - Build a docker image: `earthly +docker`
 
+The `final` branch includes a ready-made pipeline:
+
+![](./public/pipeline.png)
+
 ## License
 
 MIT License
