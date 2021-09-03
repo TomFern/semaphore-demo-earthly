@@ -3,16 +3,16 @@ WORKDIR /app
 
 build:
     COPY package.json package-lock.json ./
-    COPY --if-exists --dir node_modules ./
+    COPY --if-exists node_modules node_modules
     RUN npm install
-    COPY --dir src ./
+    COPY src src
     SAVE ARTIFACT --force node_modules AS LOCAL ./node_modules
     SAVE ARTIFACT --force package.json AS LOCAL ./package.json
     SAVE ARTIFACT --force package-lock.json AS LOCAL ./package-lock.json
 
 tests:
     FROM +build
-    COPY --dir spec ./
+    COPY spec spec
     RUN npm test
 
 lint:
@@ -23,7 +23,7 @@ lint:
 integration-tests:
     FROM +build
     COPY docker-compose.yml ./
-    COPY --dir integration-tests ./
+    COPY integration-tests integration-tests
     WITH DOCKER --compose docker-compose.yml --service db
         RUN sleep 10 && npm run integration-tests
     END
